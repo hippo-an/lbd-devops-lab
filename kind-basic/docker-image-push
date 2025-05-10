@@ -1,0 +1,15 @@
+!#/bin/bash
+
+# docker image build
+docker image build -t hivebox:0.0.1 .
+
+# tag
+docker tag hivebox:0.0.1 sag0108/hivebox:0.0.1
+
+# image check
+docker image ls -a
+
+# docker image push
+docker login -u sag0108
+docker image push sag0108/hivebox:0.0.1
+

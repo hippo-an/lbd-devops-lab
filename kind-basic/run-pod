@@ -1,0 +1,26 @@
+!#/bin/bash
+
+#docker image pull
+docker image pull sag0108/hivebox:0.0.1
+
+# image load to kind
+kind load docker-image sag0108/hivebox:0.0.1 --name my-cluster
+
+
+# create secret for env
+kubectl create secret generic forecast-api-secret \
+    --from-literal=FORECAST_SERVICE_KEY=xxxxxxxx \
+    -n hivebox
+
+
+kubectl apply -f hivebox-pod.yaml
+# pod/hivebox created
+
+kubectl get pods -n hivebox
+
+kubectl apply -f hivebox-service.yaml
+# service/hivebox-service created
+
+
+kubectl port-forward service/hivebox-service 8888:8888 -n hivebox
+
