@@ -1,0 +1,10 @@
+!#/bin/bash
+
+go install sigs.k8s.io/kind@v0.27.0
+
+kind --version
+
+kind create cluster --config kind-config.yaml --name my-cluster
+
+kubectl cluster-info --context kind-my-cluster
+kubectl get nodes
